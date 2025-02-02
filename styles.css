@@ -1,0 +1,184 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f4f4f4;
+}
+.stepper-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 98%;
+    position: fixed; 
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 20px;
+    background: #1a1a1a;
+    border-radius: 12px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+}
+
+.steps {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    width: auto;
+    z-index: 2;
+}
+.step-number {
+    width: 40px;
+    height: 40px;
+    background: #444;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: 0.3s;
+}
+.step-label {
+    margin-top: 8px;
+    font-size: 14px;
+    color: #ddd;
+}
+.step.active .step-number {
+    background: #007bff;
+    box-shadow: 0 0 10px #007bff;
+}
+.line {
+    width: 50px;
+    height: 5px;
+    background: #444;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+.step.active + .line {
+    background: #007bff;
+}
+.step-content {
+    width: 80%;
+    display: none;
+    font-size: 18px;
+    color: #333;
+    margin-top: 100px;
+    padding: 40px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    text-align: center;
+}
+.step-content.active {
+    display: block;
+}
+
+
+/* Form */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 20px;
+    background: #222;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+    width: 100%;  
+    max-width: 600px;  
+    margin: 0 auto;
+}
+
+/* Labels */
+label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #fff;
+    text-align: left;
+}
+
+/* Input Fields */
+input {
+    padding: 12px;
+    border: 2px solid transparent;
+    border-radius: 6px;
+    outline: none;
+    transition: 0.3s ease;
+    font-size: 16px;
+    background: #333;
+    color: white;
+}
+
+input:focus {
+    border: 2px solid #007bff;
+    background: #444;
+    box-shadow: 0px 0px 10px rgba(0, 123, 255, 0.5);
+}
+
+/* Buttons Container */
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+/* Buttons */
+button {
+    padding: 12px 30px;
+    margin-left: 50px;
+    border: none;
+    background: linear-gradient(135deg, #007bff, #0056b3);
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: 0.3s ease-in-out;
+    box-shadow: 0px 4px 10px rgba(0, 123, 255, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Hover Effect */
+button:hover {
+    background: linear-gradient(135deg, #0056b3, #003f80);
+    box-shadow: 0px 6px 15px rgba(0, 123, 255, 0.5);
+    transform: scale(1.05);
+}
+
+/* Disabled Button */
+button:disabled {
+    background: #555;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+/* Button Animation */
+button::before {
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    width: 150%;
+    height: 150%;
+    background: rgba(255, 255, 255, 0.1);
+    transform: rotate(-45deg);
+    transition: 0.5s ease;
+}
+
+button:hover::before {
+    top: 100%;
+    left: 100%;
+}
