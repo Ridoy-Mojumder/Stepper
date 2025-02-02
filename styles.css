@@ -5,87 +5,138 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #f4f4f4;
+    background-color: #ffffff;
 }
+
 .stepper-container {
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 98%;
-    position: fixed; 
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
+    width: 90%;
+    position: relative;
     padding: 20px;
-    background: #1a1a1a;
-    border-radius: 12px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
-    z-index: 1000;
 }
 
 .steps {
     display: flex;
     align-items: center;
-    gap: 10px;
+    justify-content: space-between;
+    width: 100%;
 }
+.steps:last-child{
+    width: 100%;
+    
+    
+}
+
+/* Connecting Line */
+.step::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 4px;
+    background: #1e1e1e;
+    /* background: #e0e6f0; */
+    top: 50%;
+    left: 0px;
+    transform: translateY(-50%);
+    transition: 0.4s;
+}
+
+/* Active Line */
+/* .step::after {
+    content: "";
+    position: absolute;
+    width: 0%;
+    height: 4px;
+    background: #1e1e1e;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    transition: 0.4s;
+} */
+
+/* Step Item */
 .step {
+    width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     position: relative;
-    width: auto;
-    z-index: 2;
+    z-index: -1;
 }
+
+/* Step Number */
 .step-number {
-    width: 40px;
-    height: 40px;
-    background: #444;
-    color: white;
-    font-size: 16px;
+    width: 36px;
+    height: 36px;
+    background: #e0e6f0;
+    color: #000;
+    font-size: 14px;
     font-weight: bold;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 50%;
+    border: 2px solid transparent;
     transition: 0.3s;
 }
-.step-label {
-    margin-top: 8px;
-    font-size: 14px;
-    color: #ddd;
+
+/* First step open circle */
+.step:first-child .step-number {
+    background: white;
+    border: 2px solid #1e1e1e;
+    color: #1e1e1e;
+}
+
+/* Active Steps */
+.step.active::before{
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 4px;
+    background: #1e1e1e;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    transition: 0.4s;
+
+
+    color: white;
 }
 .step.active .step-number {
-    background: #007bff;
-    box-shadow: 0 0 10px #007bff;
+
+    background: #1e1e1e;
+    color: white;
 }
-.line {
-    width: 50px;
-    height: 5px;
-    background: #444;
-    border-radius: 5px;
-    transition: 0.3s;
+
+/* Step Labels */
+.step-label {
+    margin-top: 8px;
+    font-size: 12px;
+    color: #666;
 }
-.step.active + .line {
-    background: #007bff;
-}
+
+
+
+
+/* Step Content */
 .step-content {
     width: 80%;
     display: none;
     font-size: 18px;
-    color: #333;
-    margin-top: 100px;
+    color: #ddd;
     padding: 40px;
-    background-color: #fff;
+    background-color: #1e1e1e;
     border-radius: 10px;
-    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
     margin-bottom: 20px;
     text-align: center;
 }
+
 .step-content.active {
     display: block;
 }
-
 
 /* Form */
 form {
@@ -96,8 +147,8 @@ form {
     background: #222;
     border-radius: 10px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
-    width: 100%;  
-    max-width: 600px;  
+    width: 100%;
+    max-width: 600px;
     margin: 0 auto;
 }
 
@@ -127,17 +178,16 @@ input:focus {
     box-shadow: 0px 0px 10px rgba(0, 123, 255, 0.5);
 }
 
-/* Buttons Container */
+/* Buttons */
 .buttons {
     display: flex;
     justify-content: space-between;
     margin-top: 20px;
+    gap: 40px;
 }
 
-/* Buttons */
 button {
     padding: 12px 30px;
-    margin-left: 50px;
     border: none;
     background: linear-gradient(135deg, #007bff, #0056b3);
     color: white;
@@ -147,38 +197,16 @@ button {
     border-radius: 8px;
     transition: 0.3s ease-in-out;
     box-shadow: 0px 4px 10px rgba(0, 123, 255, 0.3);
-    position: relative;
-    overflow: hidden;
 }
 
-/* Hover Effect */
 button:hover {
     background: linear-gradient(135deg, #0056b3, #003f80);
     box-shadow: 0px 6px 15px rgba(0, 123, 255, 0.5);
     transform: scale(1.05);
 }
 
-/* Disabled Button */
 button:disabled {
     background: #555;
     cursor: not-allowed;
     box-shadow: none;
-}
-
-/* Button Animation */
-button::before {
-    content: "";
-    position: absolute;
-    top: -10px;
-    left: -10px;
-    width: 150%;
-    height: 150%;
-    background: rgba(255, 255, 255, 0.1);
-    transform: rotate(-45deg);
-    transition: 0.5s ease;
-}
-
-button:hover::before {
-    top: 100%;
-    left: 100%;
 }

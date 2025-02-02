@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stepper UI</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #ffffff;
+        }
+
+        .stepper-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 90%;
+            position: relative;
+            padding: 20px;
+        }
+
+        .steps {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            position: relative;
+        }
+
+        /* Connecting Line */
+        .steps::before {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 4px;
+            background: #e0e6f0;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+            transition: 0.4s;
+        }
+
+        /* Active Line */
+        .steps::after {
+            content: "";
+            position: absolute;
+            width: 0%;
+            height: 4px;
+            background: #6a5acd;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+            transition: 0.4s;
+        }
+
+        /* Step Item */
+        .step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Step Number */
+        .step-number {
+            width: 36px;
+            height: 36px;
+            background: #e0e6f0;
+            color: #000;
+            font-size: 14px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            border: 2px solid transparent;
+            transition: 0.3s;
+        }
+
+        /* First step open circle */
+        .step:first-child .step-number {
+            background: white;
+            border: 2px solid #6a5acd;
+            color: #6a5acd;
+        }
+
+        /* Active Steps */
+        .step.active .step-number {
+            background: #6a5acd;
+            color: white;
+        }
+
+        /* Step Labels */
+        .step-label {
+            margin-top: 8px;
+            font-size: 12px;
+            color: #666;
+        }
+
+        /* Next Button */
+        .next-btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: #6a5acd;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .next-btn:hover {
+            background: #5848ad;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="stepper-container">
+        <div class="steps">
+            <div class="step active">
+                <div class="step-number">1</div>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+            </div>
+            <div class="step">
+                <div class="step-number">4</div>
+            </div>
+        </div>
+    </div>
+
+    <button class="next-btn">Next</button>
+
+    <script>
+        let currentStep = 1;
+        const totalSteps = document.querySelectorAll(".step").length;
+        const steps = document.querySelectorAll(".step");
+        const progressLine = document.querySelector(".steps::after");
+        const nextButton = document.querySelector(".next-btn");
+
+        nextButton.addEventListener("click", () => {
+            if (currentStep < totalSteps) {
+                steps[currentStep].classList.add("active");
+                const percentage = (currentStep / (totalSteps - 1)) * 100;
+                document.styleSheets[0].addRule('.steps::after', 'width: ' + percentage + '%;');
+                currentStep++;
+            }
+        });
+    </script>
+
+</body>
+</html>
